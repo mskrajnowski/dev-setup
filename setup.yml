@@ -4,6 +4,7 @@
   tasks:
     - include: tasks/yadm.yml
     - include: tasks/utils.yml
+    - include: tasks/python.yml
   vars:
     user: "{{ lookup('env', 'USER') }}"
     home: "{{ lookup('env', 'HOME') }}"
