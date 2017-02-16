@@ -1,0 +1,10 @@
+---
+- name: install essential utilities
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - aptitude
+    - build-essential
+    - curl
+    - htop
+    - terminator
