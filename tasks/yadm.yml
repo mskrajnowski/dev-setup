@@ -2,6 +2,7 @@
 - name: install yadm
   apt:
     name: yadm
+  become: true
 - name: clone yadm repo
   command: "yadm clone {{ yadm.repo }}"
   args:

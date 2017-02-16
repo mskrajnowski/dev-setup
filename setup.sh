@@ -15,6 +15,6 @@ echo "Cloning $REPO_URL..."
 git clone $REPO_URL $REPO_PATH
 
 echo "Running Ansible playbook..."
-ansible-playbook -i $REPO_PATH/hosts.ini $REPO_PATH/setup.yml
+ansible-playbook -K -i $REPO_PATH/hosts.ini $REPO_PATH/setup.yml
 
 echo "Done!"
