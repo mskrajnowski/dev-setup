@@ -1,0 +1,14 @@
+---
+- name: install yadm
+  apt:
+    name: yadm
+- name: clone yadm repo
+  command: "yadm clone {{ yadm.repo }}"
+  args:
+    creates: "/home/{{ user }}/.yadm"
+- name: check yadm conflicts
+  command: "yadm ls-files -u"
+  register: conflicts
+- name: resolve yadm conflicts
+  command: "yadm reset --hard origin/master"
+  when: conflicts.stdout_lines

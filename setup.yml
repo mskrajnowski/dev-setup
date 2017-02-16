@@ -1,0 +1,12 @@
+---
+- name: setup
+  hosts: all
+  tasks:
+    - include: tasks/yadm.yml
+  vars:
+    user: "{{ lookup('env', 'USER') }}"
+    home: "{{ lookup('env', 'HOME') }}"
+    yadm:
+      repo: git@github.com:mskrajnowski/dotfiles.git
+  vars_files:
+    - vars.yml
