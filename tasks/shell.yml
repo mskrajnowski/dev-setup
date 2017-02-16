@@ -1,0 +1,35 @@
+---
+- name: install zsh
+  apt:
+    name: zsh
+  become: true
+
+- name: check if oh-my-zsh is installed
+  stat:
+    path: "{{ home | quote }}/.oh-my-zsh/oh-my-zsh.sh"
+  register: oh_my_zsh
+
+- block:
+  - name: remove .oh-my-zsh created by yadm
+    file:
+      path: "{{ home | quote }}/.oh-my-zsh"
+      state: absent
+  - name: install oh-my-zsh
+    shell: 'sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"'
+    args:
+      creates: "{{ home | quote }}/.oh-my-zsh"
+  - name: remove example oh-my-zsh customizations
+    file:
+      path: "{{ home | quote }}/.oh-my-zsh/custom"
+      state: absent
+  - name: restore yadm .oh-my-zsh files
+    command: yadm checkout {{ home | quote }}/.oh-my-zsh/custom
+    args:
+      creates: "{{ home | quote }}/.oh-my-zsh/custom"
+  when: not oh_my_zsh.stat.exists
+
+- name: set zsh as default shell
+  user:
+    name: "{{ user }}"
+    shell: /usr/bin/zsh
+  become: true
