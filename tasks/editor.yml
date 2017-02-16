@@ -1,0 +1,12 @@
+---
+- name: check Visual Studio Code installed
+  shell: code -v
+  register: vscode_check
+  ignore_errors: true
+- name: install Visual Studio Code
+  apt:
+    deb: https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable
+  become: true
+  when: vscode_check.rc
+- name: install Visual Studio Code extensions
+  command: "{{ home | quote }}/.config/Code/User/restore"

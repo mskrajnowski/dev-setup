@@ -6,6 +6,7 @@
     - include: tasks/utils.yml
     - include: tasks/python.yml
     - include: tasks/shell.yml
+    - include: tasks/editor.yml
   vars:
     user: "{{ lookup('env', 'USER') }}"
     home: "{{ lookup('env', 'HOME') }}"
