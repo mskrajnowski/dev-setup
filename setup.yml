@@ -9,6 +9,7 @@
     - include: tasks/editor.yml
     - include: tasks/docker.yml
     - include: tasks/google-chrome.yml
+    - include: tasks/gnome.yml
   vars:
     user: "{{ lookup('env', 'USER') }}"
     home: "{{ lookup('env', 'HOME') }}"
