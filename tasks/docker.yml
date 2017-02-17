@@ -1,0 +1,36 @@
+---
+- name: check ubuntu version
+  command: lsb_release -cs
+  register: ubuntu_version
+- name: add docker repo key
+  apt_key:
+    url: 'https://apt.dockerproject.org/gpg'
+    state: present
+  become: true
+- name: add docker repo
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo/ ubuntu-{{ ubuntu_version.stdout_lines[0] }} main
+    state: present
+    update_cache: true
+  become: true
+- name: install docker
+  apt:
+    name: docker-engine
+  become: true
+- name: install docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/latest/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+  become: true
+- name: add docker group
+  group:
+    name: docker
+    state: present
+  become: true
+- name: add {{ user }} to docker group
+  user:
+    name: "{{ user }}"
+    groups: docker
+    append: true
+  become: true
