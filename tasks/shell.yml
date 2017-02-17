@@ -26,6 +26,8 @@
     command: yadm checkout {{ home | quote }}/.oh-my-zsh/custom
     args:
       creates: "{{ home | quote }}/.oh-my-zsh/custom"
+  - name: restore yadm .zshrc
+    command: yadm checkout {{ home | quote }}/.zshrc
   when: not oh_my_zsh.stat.exists
 
 - name: set zsh as default shell
