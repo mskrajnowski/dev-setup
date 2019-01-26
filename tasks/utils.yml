@@ -9,3 +9,5 @@
     - curl
     - htop
     - tig
+    - httpie
+    - tmuxinator
