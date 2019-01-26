@@ -8,4 +8,4 @@
     - build-essential
     - curl
     - htop
-    - terminator
+    - tig
