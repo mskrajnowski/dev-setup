@@ -4,7 +4,7 @@
     name: yadm
   become: true
 - name: clone yadm repo
-  command: "yadm clone {{ yadm.repo }}"
+  command: "yadm clone --recurse-submodules {{ yadm.repo }}"
   args:
     creates: "/home/{{ user }}/.yadm"
 - name: check yadm conflicts
