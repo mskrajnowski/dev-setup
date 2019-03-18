@@ -15,7 +15,7 @@
       path: "{{ home | quote }}/.oh-my-zsh"
       state: absent
   - name: install oh-my-zsh
-    shell: 'sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"'
+    shell: 'git clone https://github.com/robbyrussell/oh-my-zsh.git {{ home | quote }}/.oh-my-zsh'
     args:
       creates: "{{ home | quote }}/.oh-my-zsh"
   - name: remove example oh-my-zsh customizations
@@ -26,8 +26,6 @@
     command: yadm checkout {{ home | quote }}/.oh-my-zsh/custom
     args:
       creates: "{{ home | quote }}/.oh-my-zsh/custom"
-  - name: restore yadm .zshrc
-    command: yadm checkout {{ home | quote }}/.zshrc
   when: not oh_my_zsh.stat.exists
 
 - name: set zsh as default shell
