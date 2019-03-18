@@ -33,3 +33,10 @@
     name: "{{ user }}"
     shell: /usr/bin/zsh
   become: true
+
+- name: fix tilix VTE issue
+  file:
+    path: "/etc/profile.d/vte.sh"
+    state: link
+    src: "/etc/profile.d/vte-2.91.sh"
+  become: true
