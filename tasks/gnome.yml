@@ -12,4 +12,4 @@
     - numix-icon-theme
   become: true
 - name: apply gsettings
-  command: "{{ home }}/.config/dconf/restore"
+  command: "{{ home }}/.yadm/dconf/restore"
