@@ -1,12 +1,11 @@
 ---
-- name: check Visual Studio Code installed
-  shell: code -v
-  register: vscode_check
-  ignore_errors: true
+- name: add Visual Studio Code repository
+  apt_repository: 
+    repo: deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
+  become: true
 - name: install Visual Studio Code
   apt:
-    deb: https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable
+    name: code
   become: true
-  when: vscode_check.rc
 - name: install Visual Studio Code extensions
-  command: "{{ home | quote }}/.config/Code/User/restore"
+  command: "{{ home | quote }}/.yadm/vscode/restore"
