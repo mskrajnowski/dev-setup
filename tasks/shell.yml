@@ -40,3 +40,6 @@
     state: link
     src: "/etc/profile.d/vte-2.91.sh"
   become: true
+
+- name: restore Tilix config
+  command: "{{ home | quote }}/.yadm/tilix/restore"
