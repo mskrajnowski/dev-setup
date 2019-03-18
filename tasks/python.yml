@@ -1,9 +1,6 @@
 ---
 - name: install python packages
   apt:
-    name: "{{ item }}"
+    name: 
+      - python-dev
   become: true
-  with_items:
-    - python-dev
-    - python-virtualenv
-    - virtualenvwrapper
