@@ -1,5 +1,14 @@
 ---
-- name: install chromium
+- name: add google repo key
+  apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+  become: true
+- name: add google chrome repo
+  apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    filename: google-chrome
+  become: true
+- name: install google chrome
   apt:
-    name: chromium-browser
+    name: google-chrome-stable
   become: true
