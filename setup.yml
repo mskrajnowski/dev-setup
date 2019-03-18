@@ -15,5 +15,3 @@
     home: "{{ lookup('env', 'HOME') }}"
     yadm:
       repo: git@github.com:mskrajnowski/dotfiles.git
-  vars_files:
-    - vars.yml
