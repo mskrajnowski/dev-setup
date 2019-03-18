@@ -4,19 +4,23 @@
   register: ubuntu_version
 - name: add docker repo key
   apt_key:
-    url: 'https://apt.dockerproject.org/gpg'
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
   become: true
 - name: add docker repo
   apt_repository:
-    repo: deb https://apt.dockerproject.org/repo/ ubuntu-{{ ubuntu_version.stdout_lines[0] }} main
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_version.stdout_lines[0] }} stable
+    filename: docker
   become: true
 - name: install docker
   apt:
-    name: docker-engine
+    name: 
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
   become: true
 - name: install docker-compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/latest/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.23.2/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: 0755
   become: true
