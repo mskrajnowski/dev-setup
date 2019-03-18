@@ -3,5 +3,3 @@
   apt:
     name: gnome-tweaks
   become: true
-- name: apply gsettings
-  command: "{{ home }}/.yadm/dconf/restore"
