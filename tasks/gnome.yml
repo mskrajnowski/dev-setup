@@ -2,13 +2,12 @@
 - name: add numix repo
   apt_repository:
     repo: ppa:numix/ppa
-    state: present
   become: true
 - name: install numix theme and icons
   apt:
     name: 
-    - numix-gtk-theme
-    - numix-icon-theme
+      - numix-gtk-theme
+      - numix-icon-theme
   become: true
 - name: apply gsettings
   command: "{{ home }}/.yadm/dconf/restore"

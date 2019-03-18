@@ -5,13 +5,10 @@
 - name: add docker repo key
   apt_key:
     url: 'https://apt.dockerproject.org/gpg'
-    state: present
   become: true
 - name: add docker repo
   apt_repository:
     repo: deb https://apt.dockerproject.org/repo/ ubuntu-{{ ubuntu_version.stdout_lines[0] }} main
-    state: present
-    update_cache: true
   become: true
 - name: install docker
   apt:
@@ -26,7 +23,6 @@
 - name: add docker group
   group:
     name: docker
-    state: present
   become: true
 - name: add {{ user }} to docker group
   user:
