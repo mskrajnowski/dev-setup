@@ -1,14 +1,14 @@
 ---
 - name: install essential utilities
   apt:
-    name: "{{ item }}"
+    name: 
+      - aptitude
+      - build-essential
+      - curl
+      - htop
+      - tig
+      - httpie
+      - tmuxinator
+      - nnn
   become: true
-  with_items:
-    - aptitude
-    - build-essential
-    - curl
-    - htop
-    - tig
-    - httpie
-    - tmuxinator
-    - nnn
+    

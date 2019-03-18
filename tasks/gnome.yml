@@ -6,8 +6,7 @@
   become: true
 - name: install numix theme and icons
   apt:
-    name: "{{ item }}"
-  with_items:
+    name: 
     - numix-gtk-theme
     - numix-icon-theme
   become: true
