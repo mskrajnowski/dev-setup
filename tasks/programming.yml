@@ -9,7 +9,8 @@
   become: true
 - name: install pipenv
   command: pip3 install --user pipenv
-  creates: "{{ home | quote }}/.local/bin/pipenv"
+  args:
+    creates: "{{ home | quote }}/.local/bin/pipenv"
 - name: install nodejs
   apt:
     name:
@@ -18,5 +19,6 @@
   become: true
 - name: install latest npm
   command: npm install -g npm
-  creates: /usr/local/bin/npm
+  args:
+    creates: /usr/local/bin/npm
   become: true
