@@ -4,7 +4,7 @@
   tasks:
     - include: tasks/yadm.yml
     - include: tasks/utils.yml
-    - include: tasks/python.yml
+    - include: tasks/programming.yml
     - include: tasks/shell.yml
     - include: tasks/editor.yml
     - include: tasks/docker.yml
