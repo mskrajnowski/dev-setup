@@ -22,6 +22,11 @@
   args:
     creates: /usr/local/bin/npm
   become: true
+- name: install plop
+  command: npm install -g plop
+  args:
+    creates: /usr/local/bin/plop
+  become: true
 - name: install go
   apt:
     name:
