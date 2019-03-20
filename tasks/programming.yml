@@ -22,3 +22,9 @@
   args:
     creates: /usr/local/bin/npm
   become: true
+- name: install go
+  apt:
+    name:
+      - golang-go
+      - go-dep
+  become: true
