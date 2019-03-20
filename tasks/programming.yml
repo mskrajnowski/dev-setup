@@ -1,6 +1,22 @@
 ---
-- name: install python packages
+- name: install python
   apt:
-    name: 
+    name:
       - python-dev
+      - python-pip
+      - python3-dev
+      - python3-pip
+  become: true
+- name: install pipenv
+  command: pip3 install --user pipenv
+  creates: "{{ home | quote }}/.local/bin/pipenv"
+- name: install nodejs
+  apt:
+    name:
+      - nodejs
+      - npm
+  become: true
+- name: install latest npm
+  command: npm install -g npm
+  creates: /usr/local/bin/npm
   become: true
