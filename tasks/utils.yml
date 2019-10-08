@@ -1,7 +1,15 @@
 ---
+- name: add enpass repo key
+  apt_key:
+    url: https://apt.enpass.io/keys/enpass-linux.key
+  become: true
+- name: add enpass repo
+  apt_repository:
+    repo: deb https://apt.enpass.io/ stable main
+  become: true
 - name: install essential utilities
   apt:
-    name: 
+    name:
       - aptitude
       - build-essential
       - curl
@@ -10,5 +18,5 @@
       - httpie
       - tmuxinator
       - nnn
+      - enpass
   become: true
-    
