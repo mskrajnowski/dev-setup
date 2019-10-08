@@ -21,4 +21,5 @@
       - enpass
       - tilix
       - peek
+      - jq
   become: true
