@@ -38,3 +38,15 @@
       - golang-go
       - go-dep
   become: true
+- name: add insomnia repo key
+  apt_key:
+    url: https://insomnia.rest/keys/debian-public.key.asc
+  become: true
+- name: add insomnia repo
+  apt_repository:
+    repo: "deb https://dl.bintray.com/getinsomnia/Insomnia /"
+  become: true
+- name: install insomnia
+  apt:
+    name: insomnia
+  become: true
