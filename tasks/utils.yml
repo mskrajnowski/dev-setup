@@ -19,4 +19,5 @@
       - tmuxinator
       - nnn
       - enpass
+      - tilix
   become: true
