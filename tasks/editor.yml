@@ -2,10 +2,11 @@
 - name: add Microsoft repo key
   apt_key:
     url: https://packages.microsoft.com/keys/microsoft.asc
-  become: true 
+  become: true
 - name: add Visual Studio Code repository
-  apt_repository: 
+  apt_repository:
     repo: deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
+    filename: vscode.list
   become: true
 - name: install Visual Studio Code
   apt:
