@@ -20,4 +20,5 @@
       - nnn
       - enpass
       - tilix
+      - peek
   become: true
