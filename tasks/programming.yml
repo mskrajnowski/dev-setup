@@ -50,3 +50,57 @@
   apt:
     name: insomnia
   become: true
+
+- name: check if terraform 0.12 is installed
+  stat:
+    path: "{{ home | quote }}/.local/bin/terraform-0.12"
+  register: terraform_0_12
+- name: install terraform 0.12
+  block:
+    - name: download archive
+      get_url:
+        url: https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip
+        dest: "/tmp/terraform-0.12.10.zip"
+        checksum: sha256:https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_SHA256SUMS
+    - name: prepare unzip destination directory
+      file:
+        path: "/tmp/terraform-0.12.10"
+        state: directory
+    - name: unzip binary
+      unarchive:
+        src: "/tmp/terraform-0.12.10.zip"
+        dest: "/tmp/terraform-0.12.10"
+        remote_src: true
+    - name: move binary to .local/bin
+      command: mv /tmp/terraform-0.12.10/terraform "{{ home | quote }}/.local/bin/terraform-0.12"
+  when: not terraform_0_12.stat.exists
+
+- name: check if terraform 0.11 is installed
+  stat:
+    path: "{{ home | quote }}/.local/bin/terraform-0.11"
+  register: terraform_0_11
+- name: install terraform 0.11
+  block:
+    - name: download archive
+      get_url:
+        url: https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
+        dest: "/tmp/terraform-0.11.14.zip"
+        checksum: sha256:https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_SHA256SUMS
+    - name: prepare unzip destination directory
+      file:
+        path: "/tmp/terraform-0.11.14"
+        state: directory
+    - name: unzip binary
+      unarchive:
+        src: "/tmp/terraform-0.11.14.zip"
+        dest: "/tmp/terraform-0.11.14"
+        remote_src: true
+    - name: move binary to .local/bin
+      command: mv /tmp/terraform-0.11.14/terraform "{{ home | quote }}/.local/bin/terraform-0.11"
+  when: not terraform_0_11.stat.exists
+
+- name: set terraform 0.12 as default
+  file:
+    src: "{{ home | quote }}/.local/bin/terraform-0.12"
+    dest: "{{ home | quote }}/.local/bin/terraform"
+    state: link
